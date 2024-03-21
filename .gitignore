@@ -1,3 +1,5 @@
 
 textgenerator.keras
+output.txt
+shakespeare.txt
 *.txt
