@@ -8,8 +8,11 @@ from keras.layers import Activation, Dense, LSTM
 SEQ_LENGTH = 40
 STEP_SIZE = 3 
 
+## MODEL RELATED SETTINGS:
+BATCH_SIZE = 256
+EPOCHS = 5
 #Some global stuff
-filepath = tf.keras.utils.get_file('shakespeare.txt', 'https://storage.googleapis.com/download.tensorflow.org/data/shakespeare.txt')
+filepath = tf.keras.utils.get_file('metal stuff.txt', 'https://storage.googleapis.com/download.tensorflow.org/data/shakespeare.txt')
 text = open(filepath, 'rb').read().decode(encoding='utf-8').lower() #reads the text file in lowercase
 characters = sorted(set(text)) #finds and sorts each character found in the dataset
 char_to_index = dict((c,i) for i, c in enumerate(characters)) #creates a dictionary of all uniqe characters in the dataset
@@ -34,14 +37,13 @@ def generate_model(text, characters, char_to_index, index_to_char):
 
 
     ##nerual network stuff
-        
     model = Sequential()
     model.add(LSTM(128, input_shape=(SEQ_LENGTH, len(characters))))
     model.add(Dense(len(characters)))
     model.add(Activation('softmax'))
 
     model.compile(loss='categorical_crossentropy', optimizer=tf.keras.optimizers.RMSprop(learning_rate=0.01))
-    model.fit(x,y, batch_size=256, epochs=4)
+    model.fit(x,y, batch_size=BATCH_SIZE, epochs=EPOCHS)
 
     model.save('textgenerator.keras')
 
