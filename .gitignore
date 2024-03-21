@@ -1,5 +1,5 @@
-
+# Ignore textgenerator.keras file
 textgenerator.keras
-output.txt
-shakespeare.txt
+
+# Ignore all .txt files
 *.txt
